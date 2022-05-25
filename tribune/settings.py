@@ -29,7 +29,7 @@ SECRET_KEY = 's$%9$d0*)1xykvy)qvp2by9s48dq((966@aeb6%)!1w@0h3pwm'
 MODE=config("MODE", default="dev")
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS =config('ALLOWED_HOSTS', default='127.0.0.1', cast=Csv())
 
 
 # Application definition
