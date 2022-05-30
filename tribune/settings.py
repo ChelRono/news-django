@@ -12,8 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import django_heroku
-import dj_database_url
-from decouple import config,Csv
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,10 +25,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 's$%9$d0*)1xykvy)qvp2by9s48dq((966@aeb6%)!1w@0h3pwm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-MODE=config("MODE", default="dev")
-DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS =config('ALLOWED_HOSTS', default='127.0.0.1', cast=Csv())
+DEBUG = True
+
+ALLOWED_HOSTS =[]
 
 
 # Application definition
@@ -80,8 +79,8 @@ WSGI_APPLICATION = 'tribune.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-if config('MODE')=="DEV":
- DATABASES = {
+# if config('MODE')=="dev":
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME':'tribune',
@@ -89,15 +88,15 @@ if config('MODE')=="DEV":
         'PASSWORD':'1033927'
     }
 }
-else:
-   DATABASES = {
-       'default': dj_database_url.config(
-           default=config('DATABASE_URL')
-       )
-   }
+# else:
+#    DATABASES = {
+#        'default': dj_database_url.config(
+#            default=config('DATABASE_URL')
+#        )
+#    }
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -154,3 +153,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Configure Django App for Heroku.
 django_heroku.settings(locals())
+
+
+
